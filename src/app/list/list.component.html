@@ -1,0 +1,7 @@
+<my-header title="所有联系人" [isShowCreateButton]="true"></my-header>
+<ul class="list">
+  <li *ngFor="let contact of contacts">
+    <app-list-item [contact]="contact" (routerNavigate)="routerNavigate($event)"></app-list-item>
+  </li>
+</ul>
+<my-footer></my-footer>

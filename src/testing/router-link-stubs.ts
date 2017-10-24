@@ -14,4 +14,3 @@ export class RouterLinkStubDirective {
     this.navigatedTo = this.linkParams;
   }
 }
-

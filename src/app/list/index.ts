@@ -1,2 +1,2 @@
 export * from './list.component';
-export * from './list-item.component';
+export * from './item.component';

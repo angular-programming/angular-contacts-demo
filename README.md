@@ -1,8 +1,7 @@
-## Usage
-Clone or fork this repository
-Make sure you have node.js installed（>= 6.0）
+## 通讯录例子
 
-- Run `npm install` to install dependencies.
-- Run `npm install http-server -g` to install a local http server, then run `http-server src` to serve the app/contact.json data.
-- Run `npm start` to fire up dev server.
-- Open browser and navigate to http://localhost:4200
+书籍《揭秘Angular》通用例子，请确保你的 node.js 版本 >= 6.0
+
+- 运行 `npm install` 或者 `yarn install` 安装依赖
+- 运行 `npm start` 构建并启动本地Server
+- 浏览器打开 http://localhost:4200 即可访问

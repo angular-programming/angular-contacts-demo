@@ -1,14 +1,14 @@
-import { Angular2ContactsDemoPage } from './app.po';
+import { AngularContactsDemoPage } from './app.po';
 
-describe('angular2-contacts-demo App', () => {
-  let page: Angular2ContactsDemoPage;
+describe('angular-contacts-demo App', () => {
+  let page: AngularContactsDemoPage;
 
   beforeEach(() => {
-    page = new Angular2ContactsDemoPage();
+    page = new AngularContactsDemoPage();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
+  // it('should display message saying app works', () => {
+  //   page.navigateTo();
+  //   expect(page.getParagraphText()).toEqual('app works!');
+  // });
 });

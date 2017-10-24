@@ -45,6 +45,7 @@ export class EditComponent implements OnInit {
     //
     if (!this.isAdd) {
       this.getContactDetailById(this.editId);
+      this.isName = this.isPhoneNum = this.isAddr = this.isEmail = this.isBir = true;
     }
   }
 
@@ -76,23 +77,13 @@ export class EditComponent implements OnInit {
   }
 
   getContactDetailById(id: number) {
-    const ss_contacts = sessionStorage.getItem('contacts');
-    if (ss_contacts) {
-      this.contacts = JSON.parse(ss_contacts);
-      this.contact = this.contacts[id - 1];
-    } else {
-      this._constactService.getContactById(id).subscribe(data => {
-        this.contact = data;
-      });
-    }
+    this._constactService.getContactById(id).subscribe(data => {
+      this.contact = data;
+    });
   }
 
   addContact() {
-    const contacts_length = this.contacts.length;
-    const new_id = this.contacts[contacts_length - 1].id + 1;
-
-    const new_contact = {
-      id: new_id,
+    const newContact = {
       name: this.contact.name,
       telNum: this.contact.telNum,
       address: this.contact.address,
@@ -100,13 +91,12 @@ export class EditComponent implements OnInit {
       birthday: this.contact.birthday,
       collection: 0
     };
-    this.contacts.push(new_contact);
-    sessionStorage.setItem('contacts', JSON.stringify(this.contacts));
+    this._constactService.addContact(newContact);
     this._router.navigate(['']);
   }
 
   editContact() {
-    const edit_contact = {
+    const editContact = {
       id: this.editId,
       name: this.contact.name,
       telNum: this.contact.telNum,
@@ -115,10 +105,7 @@ export class EditComponent implements OnInit {
       birthday: this.contact.birthday,
       collection: 0
     };
-    const ss_contacts = sessionStorage.getItem('contacts');
-    this.contacts = JSON.parse(ss_contacts);
-    this.contacts.splice(this.editId - 1, 1, edit_contact);
-    sessionStorage.setItem('contacts', JSON.stringify(this.contacts));
+    this._constactService.editContact(editContact);
     this._router.navigate(['/list', this.editId]);
   }
 

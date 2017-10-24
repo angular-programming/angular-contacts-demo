@@ -35,24 +35,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   collectTheContact() {
-    this.detail.collection === 0
-      ? (this.detail.collection = 1)
-      : (this.detail.collection = 0);
-    const ss_contacts = sessionStorage.getItem('contacts');
-    this.contacts = JSON.parse(ss_contacts);
-    this.contacts[this.contact_id - 1].collection = this.detail.collection;
-    sessionStorage.setItem('contacts', JSON.stringify(this.contacts));
+    this._constactService.collectContact(this.detail);
   }
 
   getById(id: number) {
-    const ss_contacts = sessionStorage.getItem('contacts');
-    if (ss_contacts) {
-      this.contacts = JSON.parse(ss_contacts);
-      this.detail = this.contacts[id - 1];
-    } else {
-      this._constactService.getContactById(id).subscribe(data => {
-        this.detail = data;
-      });
-    }
+    this._constactService.getContactById(id).subscribe(data => {
+      this.detail = data;
+    });
   }
 }

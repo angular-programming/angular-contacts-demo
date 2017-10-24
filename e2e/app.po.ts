@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class Angular2ContactsDemoPage {
+export class AngularContactsDemoPage {
   navigateTo() {
     return browser.get('/');
   }

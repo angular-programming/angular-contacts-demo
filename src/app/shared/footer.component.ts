@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  private isListPage = true;
+  isListPage = true;
 
   constructor(private _location: Location) {}
 

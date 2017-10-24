@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-item',
-  templateUrl: './list-item.component.html',
-  styleUrls: ['./list-item.component.css']
+  templateUrl: './item.component.html',
+  styleUrls: ['./item.component.css']
 })
 export class ListItemComponent implements OnInit {
   @Input() contact: any = {};

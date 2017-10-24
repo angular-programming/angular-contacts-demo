@@ -1,5 +1,5 @@
 <my-header title="我的收藏"></my-header>
-<h3 *ngIf="coll_length == 0" class="no-collection">没有收藏</h3>
+<h3 *ngIf="collections?.length === 0" class="no-collection">没有收藏</h3>
 <ul class="my-collection">
   <li *ngFor="let collection of collections">
     <a [routerLink]="['/list', collection.id]">

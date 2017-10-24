@@ -2,14 +2,78 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
 
 const CONTACT_URL = '/assets/contacts.json';
+
+let _contacts;
 
 @Injectable()
 export class ContactService {
   constructor(private http: HttpClient) {}
+
+  getContactsData(opts?: any) {
+    let source;
+    if (Array.isArray(_contacts)) {
+      source = Observable.of(_contacts);
+    } else {
+      source = this.http.request('get', CONTACT_URL)
+        .do(data => _contacts = data)
+        .catch(this.handleError);
+    }
+    return source.map(data => this.filter(data, opts));
+  }
+
+  getContactById(id) {
+    id = parseInt(id, 10);
+    return this.getContactsData({ id: id });
+  }
+
+  getCollections() {
+    return this.getContactsData({ collection: 1 });
+  }
+
+  addContact(obj: any = {}) {
+    if (!Array.isArray(_contacts)) {
+      console.error('请刷新重试');
+      return;
+    }
+    obj.id = _contacts.length + 1;
+    _contacts.push(obj);
+  }
+
+  editContact(obj: any) {
+    // tslint:disable-next-line:curly
+    if (!obj) return;
+    if (!Array.isArray(_contacts)) {
+      console.error('请刷新重试');
+      return;
+    }
+    let idx = -1;
+    for (const one of _contacts) {
+      idx++;
+      if (one.id === obj.id) {
+        _contacts[idx] = one;
+      }
+    }
+  }
+
+  collectContact(obj: any = {}) {
+    if (!Array.isArray(_contacts)) {
+      console.error('请刷新重试');
+      return;
+    }
+    for (const one of _contacts) {
+      if (one.id === obj.id) {
+        // tslint:disable-next-line:no-bitwise
+        one.collection ^= 1;
+        break;
+      }
+    }
+  }
 
   filter(data, opts) {
     // tslint:disable-next-line:curly
@@ -44,27 +108,5 @@ export class ContactService {
     }
     console.error(errMsg); // 打印到控制台
     return Observable.throw(errMsg);
-  }
-
-  request(method: string, url: string, opts?: any) {
-    return this.http.request(method, url)
-      .map(data => this.filter(data, opts))
-      .catch(this.handleError);
-  }
-
-  getContactsData() {
-    return this.request('get', CONTACT_URL);
-  }
-
-  getContactById(id: number) {
-    return this.request('get', CONTACT_URL, { id: id });
-  }
-
-  getCollections() {
-    return this.request('get', CONTACT_URL, { collection: 1 });
-  }
-
-  addContact(obj: Object = {}) {
-    return this.request('post', CONTACT_URL, obj);
   }
 }

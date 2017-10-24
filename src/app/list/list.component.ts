@@ -21,15 +21,9 @@ export class ListComponent implements OnInit {
   }
 
   getContacts() {
-    const ss_contacts = sessionStorage.getItem('contacts');
-    if (!ss_contacts) {
-      this._contactService.getContactsData().subscribe(data => {
-        this.contacts = data;
-        sessionStorage.setItem('contacts', JSON.stringify(data));
-      });
-    } else {
-      this.contacts = JSON.parse(ss_contacts);
-    }
+    this._contactService.getContactsData().subscribe(data => {
+      this.contacts = data;
+    });
   }
 
   addContact() {

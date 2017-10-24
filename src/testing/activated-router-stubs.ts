@@ -6,4 +6,3 @@ import 'rxjs/add/observable/of';
 export class ActivatedRouteStubService {
   params: Observable<any> = Observable.of({});
 }
-

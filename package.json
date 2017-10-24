@@ -8,10 +8,15 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-ssr": "ng build && ng build --app ssr",
+    "build-ssr:aot": "ng build --aot && ng build --aot --app ssr",
+    "start-ssr": "npm run build-ssr && node server",
+    "start-ssr:aot": "npm run build-ssr:aot && node server-aot"
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "4.3.1",
     "@angular/common": "4.3.1",
     "@angular/compiler": "4.3.1",
     "@angular/core": "4.3.1",
@@ -19,8 +24,10 @@
     "@angular/http": "4.3.1",
     "@angular/platform-browser": "4.3.1",
     "@angular/platform-browser-dynamic": "4.3.1",
+    "@angular/platform-server": "4.3.1",
     "@angular/router": "4.3.1",
     "core-js": "2.4.1",
+    "preboot": "5.0.0",
     "rxjs": "5.1.0",
     "zone.js": "0.8.4"
   },
@@ -38,6 +45,7 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "node-static": "^0.7.9",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",

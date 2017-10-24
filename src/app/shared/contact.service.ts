@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-const CONTACT_URL = '/assets/contacts.json';
+// const CONTACT_URL = '/assets/contacts.json';
+// HttpClient不支持请求本地文件，故SSR模式下需要赋值为完整的HTTP路径
+const CONTACT_URL = 'http://localhost:4200/assets/contacts.json';
 
 let _contacts;
 
@@ -109,4 +111,12 @@ export class ContactService {
     console.error(errMsg); // 打印到控制台
     return Observable.throw(errMsg);
   }
+
+  getCache() {
+    return _contacts;
+  }
+  setCache(data) {
+    _contacts = data;
+  }
+
 }

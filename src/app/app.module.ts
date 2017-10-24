@@ -36,7 +36,9 @@ import {
     BtnClickDirective
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({
+      appId: 'angular-contacts-demo'
+    }),
     FormsModule,
     HttpClientModule,
     AppRoutingModule

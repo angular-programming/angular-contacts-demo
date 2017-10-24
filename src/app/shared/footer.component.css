@@ -7,16 +7,18 @@ nav{
   background-color: #ffffff;
   border-top: 1px solid #3DD689;
 }
-nav a{
+nav button {
+  border: 0;
   float: left;
   width: 50%;
   height: 35px;
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  background-color: #FFF;
 }
 
-nav a i {
+nav button i {
   display: block;
   height: 35px;
   line-height: 35px;
@@ -25,11 +27,11 @@ nav a i {
   text-align: center;
 }
 
-nav a.clickOn{
+nav button.clickOn{
   background-color: #3DD689;
 }
 
-nav a.clickOn i {
+nav button.clickOn i {
   color: #ffffff;
 }
 nav em {
@@ -44,7 +46,7 @@ nav em {
   margin-top: -5px;
   opacity: 0;
 }
-/*nav a.btn-click em{
+/*nav button.btn-click em{
   -webkit-animation: scale_zoom 1s both infinite;
 }
 

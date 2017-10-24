@@ -1,3 +1,6 @@
+/*
+ * 此文件使用的是老的http模块，现已废弃不用
+ */
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';

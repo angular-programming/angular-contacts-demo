@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
@@ -12,18 +13,23 @@ import 'rxjs/add/operator/do';
 const CONTACT_URL = 'http://localhost:4200/assets/contacts.json';
 
 let _contacts;
+const CONTACTS_KEY = makeStateKey('contacts');
 
 @Injectable()
 export class ContactService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private state: TransferState) {}
 
   getContactsData(opts?: any) {
     let source;
-    if (Array.isArray(_contacts)) {
-      source = Observable.of(_contacts);
+    _contacts = this.state.get(CONTACTS_KEY, null as any);
+    if (_contacts) {
+      source = Observable.of(_contacts)
     } else {
       source = this.http.request('get', CONTACT_URL)
-        .do(data => _contacts = data)
+        .do(data => {
+          this.state.set(CONTACTS_KEY, data as any)
+          _contacts = data
+        })
         .catch(this.handleError);
     }
     return source.map(data => this.filter(data, opts));
@@ -110,13 +116,6 @@ export class ContactService {
     }
     console.error(errMsg); // 打印到控制台
     return Observable.throw(errMsg);
-  }
-
-  getCache() {
-    return _contacts;
-  }
-  setCache(data) {
-    _contacts = data;
   }
 
 }

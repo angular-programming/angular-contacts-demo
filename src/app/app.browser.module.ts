@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserPrebootModule } from 'preboot/browser';
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { TransferBrowserModule } from './transfer.browser.module';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     AppModule,
     BrowserPrebootModule.replayEvents(),
-    TransferBrowserModule
+    BrowserTransferStateModule
   ],
   bootstrap: [AppComponent],
   providers: []

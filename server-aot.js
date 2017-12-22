@@ -5,16 +5,13 @@ const http = require('http');
 const Static = require('node-static');
 const files = new Static.Server(path.join(__dirname, 'dist'));
 
-// preboot部分代码依赖了reflect特性
-require('core-js/es6/reflect');
-require('core-js/es7/reflect');
 const { AppServerModuleNgFactory } = require('./dist-ssr/main.bundle');
 const { renderModuleFactory } = require('@angular/platform-server');
 
 http.createServer((req, res) => {
   const path = req.url;
   if(
-    path.indexOf('/assets') === 0 || 
+    path.indexOf('/assets') === 0 ||
     path === '/favicon.ico' ||
     /\.js(?:\.map)?$/.test(path)
   ) {
